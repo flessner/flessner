@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* TEXT & GENERAL */
+body {
+  @apply bg-l1;
+  @apply dark: bg-d0;
+  @apply text-d1;
+  @apply dark: text-l1;
+  @apply text-base;
+  @apply font-normal;
+}
+
+/* HEADINGS */
+h1,
+h2,
+h3,
+h4 {
+  @apply text-d0;
+  @apply dark: text-l0;
+  @apply font-semibold;
+  @apply select-none;
+}
+
+h2,
+h3,
+h4 {
+  @apply mb-4;
+}
+
+h2 {
+  @apply mt-20;
+  @apply text-2xl;
+  @apply lg: text-3xl;
+}
+
+h3 {
+  @apply mt-16;
+  @apply text-xl;
+  @apply lg: text-2xl;
+}
+
+h4 {
+  @apply mt-12;
+  @apply text-lg;
+  @apply lg: text-xl;
+}
