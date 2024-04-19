@@ -1,3 +1,6 @@
+/* custom theme */
+@import url('https://cdn.jsdelivr.net/gh/sansui233/logseq-bonofix-theme/custom.css');
+
 /* hide query builder */
 .cp__query-builder-filter {
   display: none;
