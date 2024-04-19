@@ -1,0 +1,12 @@
+/* hide query builder */
+.cp__query-builder-filter {
+  display: none;
+}
+
+/* hide card styling */
+div[data-refs-self*='"card"'] {
+  box-shadow: none;
+  border-radius: 0px;
+  margin: 0;
+  padding: 0;
+}
