@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "COMPATIBILITY_DATE=2025-01-08 vinxi dev",
+    "build": "COMPATIBILITY_DATE=2025-01-08 vinxi build",
+    "start": "COMPATIBILITY_DATE=2025-01-08 vinxi start"
+  },
+  "dependencies": {
+    "@flessner/unocss-preset": "file:../unocss-preset",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.0.11",
+    "@unocss/reset": "^0.65.1",
+    "solid-js": "^1.9.2",
+    "unocss": "^0.65.1",
+    "vinxi": "^0.4.3"
+  },
+  "overrides": {
+    "vite": "5.4.10"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

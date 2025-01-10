@@ -1,0 +1,22 @@
+#node
+dist
+.solid
+.output
+.vinxi
+app.config.timestamp_*.js
+node_modules
+
+# os
+.DS_Store
+Thumbs.db
+
+# env 
+.env
+*.pem
+
+# ide
+/.idea
+.project
+.classpath
+*.launch
+.settings/
