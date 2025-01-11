@@ -4,6 +4,10 @@ import UnoCSS from "unocss/vite";
 
 export default defineConfig({
   vite: {
-    plugins: [UnoCSS(configFlessner)]
+    plugins: [UnoCSS(
+      configFlessner({
+        loadHSL: ['background', 'foreground', 'primary']
+      })
+    )]
   }
 });

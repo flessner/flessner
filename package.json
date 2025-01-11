@@ -6,7 +6,7 @@
     "start": "COMPATIBILITY_DATE=2025-01-08 vinxi start"
   },
   "dependencies": {
-    "@flessner/unocss-preset": "file:../unocss-preset",
+    "@flessner/unocss-preset": "^0.2.0",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.11",
     "@unocss/reset": "^0.65.1",
