@@ -14,11 +14,11 @@ export default (props: Props) => {
 
   return (
     <A href={props.href || ''}>
-      <div class={`relative h-48 rounded-xl hover:scale-103 duration-200 ${props.class}`}>
-        <p class="absolute bottom-10 left-2 text-background/50 text-7xl font-bold">{props.title}</p>
-        <div class="absolute bottom-0 left-0 right-0 h-8 bg-background/50" />
+      <div class={`relative h-48 rounded-xl hover:scale-102 duration-200 ${props.class}`}>
+        <p class="absolute bottom-8 left-2 text-background/50 text-7xl font-bold">{props.title}</p>
+        <div class="absolute bottom-0 left-0 right-0 h-6 bg-background/50" />
         <Show when={props.icon}>
-          <Icon size={96} class="absolute bottom-10 right-2 text-background/50" />
+          <Icon size={96} class="absolute bottom-9 right-2 text-background/50" />
         </Show>
         <Show when={props.label}>
           <div class="absolute row top-2 right-2 h-8 bg-background px-4 rounded-full">
