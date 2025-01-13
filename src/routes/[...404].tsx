@@ -1,10 +1,14 @@
+import { HttpStatusCode } from '@solidjs/start';
+import { A } from '@solidjs/router';
+
 export default () => {
   return (
-    <div class="max-w-lg mx-auto px-2">
-      <p class="text-3xl mt-12 font-mono text-foreground/muted">404</p>
-      <div class="mt-4">
-        <a href="/" class="text-primary underline">{"<- Back Home"}</a>
+    <>
+      <HttpStatusCode code={404} />
+      <div class="py-20 col gap-4 text-center">
+        <p class="font-bold text-5xl">404</p>
+        <A href="/" class="text-blue-500">{"<- Home"}</A>
       </div>
-    </div>
+    </>
   );
 }

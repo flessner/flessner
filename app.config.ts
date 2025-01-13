@@ -6,7 +6,7 @@ export default defineConfig({
   vite: {
     plugins: [UnoCSS(
       configFlessner({
-        loadHSL: ['background', 'foreground', 'primary']
+        loadHSL: ['background', 'foreground']
       })
     )]
   }

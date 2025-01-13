@@ -1,27 +1,23 @@
-const Heading = (props: any) => {
-  return (
-    <h2 class="mb-2 mt-8 text-foreground/70 font-mono font-bold tracking-widest text-xs">{props.children}</h2>
-  );
-}
-
-const Link = (props: any) => {
-  return (
-    <a href={props.href} class="text-primary underline block">
-      {props.children}
-    </a>
-  );
-}
+import { A } from '@solidjs/router';
+import { Folder, Newspaper, Mail } from 'lucide-solid';
+import Title from '../lib/Title';
+import Item from '../lib/Item';
 
 export default () => {
   return (
-    <div class="max-w-lg mx-auto px-4 -mt-2">
-      <Heading>PROJECTS</Heading>
-      <Link href="https://netzblatt.com">netzblatt</Link>
-      <Heading>PACKAGES</Heading>
-      <Link href="https://www.npmjs.com/package/@flessner/unocss-preset">@flessner/unocss-preset</Link>
-      <Heading>SOCIALS</Heading>
-      <Link href="https://github.com/flessner">github</Link>
-      <Link href="https://bsky.app/profile/flessner.dev">bluesky</Link>
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="row h-20">
+        <A href="/" class="my-auto font-bold text-2xl select-none">flessner.dev</A>
+        <a href="mailto:torben@flessner.dev" class="my-auto ml-auto"><Mail /></a>
+      </div>
+      <Title label="Projects" icon={Folder} />
+      <div class="col gap-4">
+        <Item title="Netzblatt" href="https://viernheim.netzblatt.com" icon={Newspaper} class="bg-blue-500" label="WIP" />
+        <Item title="Bookheim" class="bg-gray-500/50" label="TBD" />
+        <Item title="Notized" class="bg-gray-500/50" label="TBD" />
+        <Item title="NothingERP" class="bg-gray-500/50" label="TBD" />
+      </div>
+      <div class="h-64" />
     </div>
   );
 }
