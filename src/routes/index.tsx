@@ -1,6 +1,6 @@
 import { A } from '@solidjs/router';
 import { MetaProvider, Title as MetaTitle } from '@solidjs/meta';
-import { Folder, Newspaper, Mail } from 'lucide-solid';
+import { Folder, Newspaper, Mail, Github } from 'lucide-solid';
 import Title from '../lib/Title';
 import Item from '../lib/Item';
 
@@ -9,9 +9,12 @@ export default () => {
     <MetaProvider>
       <MetaTitle>flessner.dev</MetaTitle>
       <div class="max-w-2xl mx-auto px-4">
-        <div class="row h-20">
+        <div class="row h-20 justify-between">
           <A href="/" class="my-auto font-bold text-2xl select-none">flessner.dev</A>
-          <a href="mailto:torben@flessner.dev" class="my-auto ml-auto"><Mail /></a>
+          <div class="row my-auto gap-2">
+            <A href="https://github.com/flessner" class="my-auto"><Github /></A>
+            <a href="mailto:torben@flessner.dev" class="my-auto"><Mail /></a>
+          </div>
         </div>
         <Title label="Projects" icon={Folder} />
         <div class="col gap-4">
