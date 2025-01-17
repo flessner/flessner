@@ -19,6 +19,7 @@ export default () => {
         <Title label="Projects" icon={Folder} />
         <div class="col gap-4">
           <Item title="Netzblatt" href="https://viernheim.netzblatt.com" icon={Newspaper} class="bg-blue-500" label="WIP" />
+          <Item title="StickyKey" class="bg-gray-500/50" label="TBD" />
           <Item title="Bookheim" class="bg-gray-500/50" label="TBD" />
           <Item title="Notized" class="bg-gray-500/50" label="TBD" />
           <Item title="NothingERP" class="bg-gray-500/50" label="TBD" />
