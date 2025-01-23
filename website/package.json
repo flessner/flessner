@@ -12,6 +12,8 @@
     "@solidjs/start": "^1.0.11",
     "@unocss/reset": "^0.65.1",
     "lucide-solid": "^0.471.0",
+    "nanoid": "^5.0.9",
+    "openai": "^4.80.0",
     "solid-js": "^1.9.2",
     "unocss": "^0.65.1",
     "vinxi": "^0.4.3"

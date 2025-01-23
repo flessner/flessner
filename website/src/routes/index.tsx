@@ -16,7 +16,12 @@ export default () => {
             <a href="mailto:torben@flessner.dev" class="my-auto"><Mail /></a>
           </div>
         </div>
-        <Title label="Projects" icon={Folder} />
+        <div class="row gap-2 h-12">
+          <Folder size={16} strokeWidth={3} class="my-auto" />
+          <p class="my-auto text-xs font-bold font-mono select-none">
+            PROJECTS
+          </p>
+        </div>
         <div class="col gap-4">
           <Item title="Netzblatt" href="https://viernheim.netzblatt.com" icon={Newspaper} class="bg-blue-500" label="WIP" />
           <Item title="StickyKey" class="bg-gray-500/50" label="TBD" />
@@ -24,7 +29,11 @@ export default () => {
           <Item title="Notized" class="bg-gray-500/50" label="TBD" />
           <Item title="NothingERP" class="bg-gray-500/50" label="TBD" />
         </div>
-        <div class="h-64" />
+        <div class="row gap-2 h-12 mt-16">
+          <a href="/int/about" class="text-xs font-mono my-auto text-foreground/10">About?</a>
+          <a href="/int/contact" class="text-xs font-mono my-auto text-foreground/10">Contact?</a>
+          <a href="/int/jobs" class="text-xs font-mono my-auto text-foreground/10">Jobs?</a>
+        </div>
       </div>
     </MetaProvider>
   );
