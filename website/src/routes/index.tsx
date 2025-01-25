@@ -1,7 +1,6 @@
 import { A } from '@solidjs/router';
 import { MetaProvider, Title as MetaTitle } from '@solidjs/meta';
 import { Folder, Newspaper, Mail, Github } from 'lucide-solid';
-import Title from '../lib/Title';
 import Item from '../lib/Item';
 
 export default () => {
