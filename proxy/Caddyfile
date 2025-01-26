@@ -1,0 +1,13 @@
+:3000 {
+    header {
+        Access-Control-Allow-Origin *
+    }
+
+    handle_path /posthog* {
+        rewrite * {path}
+        reverse_proxy https://eu.i.posthog.com:443 {
+            header_up Host eu.i.posthog.com
+            header_down -Access-Control-Allow-Origin
+        }
+    }
+}
