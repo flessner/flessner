@@ -1,6 +1,21 @@
+{
+    servers {
+		trusted_proxies static 172.16.0.0/16
+        client_ip_headers Fly-Client-IP X-Forwarded-For
+	}
+}
+
 :3000 {
     header {
         Access-Control-Allow-Origin *
+    }
+
+    handle_path /posthog/static* {
+        rewrite * /static/{path}
+        reverse_proxy https://eu-assets.i.posthog.com:443 {
+            header_up Host eu-assets.i.posthog.com
+            header_down -Access-Control-Allow-Origin
+        }
     }
 
     handle_path /posthog* {
