@@ -19,7 +19,7 @@
 <svelte:window bind:scrollY />
 
 <div
-	class={`absolute z-50 top-0 h-20 w-full duration-300 pointer-events-none ${scrollY > 1 ? "backdrop-blur-2xl" : ""}`}
+	class={`absolute z-50 top-0 h-20 w-full duration-300 ease-in-out pointer-events-none ${scrollY > 1 ? "backdrop-blur-2xl" : ""}`}
 >
 	<div class="h-full max-w-xl mx-auto px-4 flex flex-row">
 		<a href="/" class="my-auto pointer-events-auto">flessner.dev</a>
