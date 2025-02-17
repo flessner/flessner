@@ -1,7 +1,8 @@
 <div class="flex flex-col gap-4">
     <p>
-        I didn't have the time to write something interesting here yet. I hope
-        to address this in the coming months.
+        I didn't have the time to write something interesting here yet.
+        <br />
+        I hope to address this in the coming months.
     </p>
     <p>- February 2024</p>
 
