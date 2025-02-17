@@ -1,3 +1,7 @@
+<svelte:head>
+    <title>Torben Flessner</title>
+</svelte:head>
+
 <div class="flex flex-col gap-4">
     <p>
         I didn't have the time to write something interesting here yet.
