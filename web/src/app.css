@@ -5,17 +5,20 @@
 @theme {
   --color-base: hsl(var(--base));
   --color-base-foreground: hsl(var(--base-foreground));
+  --color-primary: hsl(var(--primary));
 }
 
 :root {
   --base: 0 0% 100%;
   --base-foreground: 0 0% 10%;
+  --primary: 215 100% 60%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --base: 0 0% 5%;
     --base-foreground: 0 0% 90%;
+    --primary: 215 100% 60%;
   }
 }
 

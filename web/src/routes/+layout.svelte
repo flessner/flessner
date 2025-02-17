@@ -18,7 +18,7 @@
 </script>
 
 <ParaglideJS {i18n}>
-	<div class="max-w-xl mx-auto px-2">
+	<div class="max-w-2xl mx-auto px-2">
 		<div class="h-32 flex flex-row">
 			<div class="flex flex-col h-full justify-center">
 				<a href="/" class="text-xl hover:underline font-bold">
