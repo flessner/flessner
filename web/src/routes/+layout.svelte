@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { ParaglideJS } from "@inlang/paraglide-sveltekit";
+	import { i18n } from "$lib/i18n";
+	import * as m from "$lib/paraglide/messages";
+
 	import { browser } from "$app/environment";
 	import { beforeNavigate, afterNavigate } from "$app/navigation";
 	import posthog from "posthog-js";
@@ -11,29 +15,18 @@
 		beforeNavigate(() => posthog.capture("$pageleave"));
 		afterNavigate(() => posthog.capture("$pageview"));
 	}
-
-	let scrollY = $state(0);
-	let compact = $derived(scrollY > 50);
 </script>
 
-<svelte:window bind:scrollY />
-
-<div
-	class={`fixed top-0 w-full backdrop-blur-2xl pb-2 duration-500 ease-in-out hover:pb-1`}
->
-	<div
-		class={`px-4 flex flex-row justify-between bg-background-alt overflow-hidden outline-border outline-4 duration-500 ease-in-out hover:outline-primary hover:outline-offset-0 ${compact ? "h-12 outline-offset-4" : "h-24 outline-offset-8"}`}
-	>
-		<div class="flex flex-col -gap-2 justify-center select-none">
-			<a href="/" class="h-5 hover:underline">Torben Flessner</a>
-			<p
-				class={`duration-500 ease-in-out ${compact ? "h-0 translate-y-5" : "h-5"}`}
-			>
-				Student @
-				<a class="hover:underline" href="https://www.kit.edu/">KIT</a>
-			</p>
+<ParaglideJS {i18n}>
+	<div class="max-w-xl mx-auto px-2">
+		<div class="h-32 flex flex-row">
+			<div class="flex flex-col h-full justify-center">
+				<a href="/" class="text-xl hover:underline font-bold">
+					{m.headline()}
+				</a>
+				<p class="text-sm italic">{m.tagline()}</p>
+			</div>
 		</div>
+		{@render children()}
 	</div>
-</div>
-
-{@render children()}
+</ParaglideJS>
