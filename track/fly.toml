@@ -1,0 +1,4 @@
+app = 'flessner-hn-track'
+primary_region = 'ams'
+
+[build]
