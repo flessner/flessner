@@ -1,4 +1,4 @@
-app = 'flessner-hn-track'
+app = 'flessner-track'
 primary_region = 'ams'
 
 [build]
