@@ -4,7 +4,7 @@ import { CronJob } from 'cron';
 
 const FIREBASE = 'https://hacker-news.firebaseio.com/v0'
 const AGOLIA = 'https://hn.algolia.com/api' // 10000 requests per hour
-const WEBHOOK = 'https://discord.com/api/webhooks/1330913886240641044/gUUXyHecrQXtq1b5Gzvf1ohhqgq-lUc2zZFgcD_fQsfsnzvc_G0eXKVIbDYqNLM1eBmC'
+const WEBHOOK = process.env.WEBHOOK || ''
 
 // run every hour
 new CronJob('0 * * * *', main, null, true);
@@ -87,7 +87,7 @@ async function main() {
       },
       body: JSON.stringify({
         content: message
-       })
+      })
     })
 
     // console.log('message sent to discord')
