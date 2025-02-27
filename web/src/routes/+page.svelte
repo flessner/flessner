@@ -7,8 +7,12 @@
     let clientHeight = $state(0);
     let clientWidth = $state(0);
 
-    let amountX = $derived(Math.floor(clientWidth / size) + 4);
-    let amountY = $derived(Math.floor(clientHeight / size) + 4);
+    let amountX = $derived(
+        clientWidth ? Math.floor(clientWidth / size) + 4 : 0,
+    );
+    let amountY = $derived(
+        clientHeight ? Math.floor(clientHeight / size) + 4 : 0,
+    );
 
     // mouse position
     let mouseY = $state(-500);
