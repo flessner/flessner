@@ -13,13 +13,13 @@
 	}
 </script>
 
-<div class="max-w-2xl mx-auto px-2">
+<div class="max-w-2xl mx-auto px-2 min-h-screen">
 	<div class="h-32 flex flex-row">
 		<div class="flex flex-col h-full justify-center">
 			<a href="/" class="text-xl hover:underline font-bold">
-				{m.headline()}
+				Torben Flessner
 			</a>
-			<p class="text-sm italic">{m.tagline()}</p>
+			<p class="text-sm italic">Studying Digital Economics</p>
 		</div>
 	</div>
 	{@render children()}
