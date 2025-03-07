@@ -56,7 +56,7 @@
         <br />
         I hope to address this in the coming months.
     </p>
-    <p>- February 2024</p>
+    <p>- January 2025</p>
 
     <p>
         -
@@ -100,7 +100,7 @@
         class={`absolute z-10 w-[32px] h-[32px] flex items-center justify-center duration-200`}
         style={`top: ${y * size - size / 2 + offsetY}px; left: ${x * size - size / 2 + offsetX}px; transform: translate(${effectX * effect}px, ${effectY * effect}px);`}
     >
-        <p class="text-base-foreground/5 font-mono text-xs select-none">
+        <p class="text-base-foreground/8 font-mono text-xs select-none">
             {letter}
         </p>
     </div>
