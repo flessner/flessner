@@ -1,0 +1,21 @@
+{
+    servers {
+		trusted_proxies static 172.16.0.0/16
+        client_ip_headers Fly-Client-IP X-Forwarded-For
+	}
+
+    tailscale {
+        state_dir "/var/lib/tailscale"
+
+        proxy2025 {
+            ephemeral false
+            hostname proxy2025
+        }
+    }
+}
+
+:3000 {
+    reverse_proxy http://homelab2023:4000 {
+        transport tailscale proxy2025
+    }
+}
