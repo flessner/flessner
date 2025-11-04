@@ -5,17 +5,31 @@
 	}
 
     tailscale {
-        state_dir "/var/lib/tailscale"
-
-        proxy2025 {
-            ephemeral false
-            hostname proxy2025
-        }
+        ephemeral true
+        hostname proxy2025
     }
 }
 
-:3000 {
+http://owui.flessner.dev:3000 {
     reverse_proxy http://homelab2023:4000 {
         transport tailscale proxy2025
+    }
+}
+
+http://proxy.flessner.dev:3000 {
+    handle_path /posthog* {
+        rewrite * {path}
+        reverse_proxy https://eu.i.posthog.com:443 {
+            header_up Host eu.i.posthog.com
+            header_down -Access-Control-Allow-Origin
+        }
+    }
+
+    handle_path /posthog/static* {
+        rewrite * /static/{path}
+        reverse_proxy https://eu-assets.i.posthog.com:443 {
+            header_up Host eu-assets.i.posthog.com
+            header_down -Access-Control-Allow-Origin
+        }
     }
 }
