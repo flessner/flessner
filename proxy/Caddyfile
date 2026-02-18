@@ -5,30 +5,43 @@
 	}
 
     tailscale {
-        ephemeral true
-        hostname proxy2025
+        hostname proxy
     }
 }
 
 http://owui.flessner.dev:3000 {
     reverse_proxy http://homelab2023:4000 {
-        transport tailscale proxy2025
+        transport tailscale proxy
     }
 }
 
 http://proxy.flessner.dev:3000 {
-    handle_path /posthog* {
-        rewrite * {path}
-        reverse_proxy https://eu.i.posthog.com:443 {
-            header_up Host eu.i.posthog.com
-            header_down -Access-Control-Allow-Origin
-        }
+    @options method OPTIONS
+    handle @options {
+        header Access-Control-Allow-Origin "*"
+        header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        header Access-Control-Allow-Headers "*"
+        respond 204
+    }
+
+    header {
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "*"
     }
 
     handle_path /posthog/static* {
         rewrite * /static/{path}
         reverse_proxy https://eu-assets.i.posthog.com:443 {
             header_up Host eu-assets.i.posthog.com
+            header_down -Access-Control-Allow-Origin
+        }
+    }
+
+    handle_path /posthog* {
+        rewrite * {path}
+        reverse_proxy https://eu.i.posthog.com:443 {
+            header_up Host eu.i.posthog.com
             header_down -Access-Control-Allow-Origin
         }
     }
