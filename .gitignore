@@ -1,11 +1,6 @@
-# os
-.DS_Store
-Thumbs.db
-
-# env 
+# Environment 
 .env
-*.pem
 
-# ide
+# IDE
 .vscode
 .idea
