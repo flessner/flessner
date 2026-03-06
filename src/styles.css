@@ -1,0 +1,463 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   TYPEFACES
+   Display  : Bahnschrift — German condensed grotesque, system font
+   Body     : IBM Plex Mono — monospace precision
+───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────── */
+:root {
+    --ink:      #09090b;
+    --paper:    #ffffff;
+    --accent:   #2563ff;
+    --muted:    #71717a;
+    --rule:     #e4e4e7;
+
+    --font-display: "Bahnschrift", "DIN Alternate", "Franklin Gothic Medium",
+                    "Nimbus Sans Narrow", Arial, sans-serif;
+    --font-body:    "IBM Plex Mono", "Courier New", monospace;
+
+    --gap:    clamp(1.5rem, 4vw, 3rem);
+    --gutter: clamp(1.5rem, 5vw, 4.5rem);
+
+    scroll-behavior: smooth;
+}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    background-color: var(--paper);
+    color: var(--ink);
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    background-color: var(--paper);
+    color: var(--ink);
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+───────────────────────────────────────────── */
+.type-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+.type-label {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT PRIMITIVES
+───────────────────────────────────────────── */
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+}
+
+/* ─────────────────────────────────────────────
+   HERO — its own complete world.
+   No header overlaid. The canvas is the page.
+───────────────────────────────────────────── */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+#hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Overlay: purely for the bottom text cluster.
+   Grid splits into top (empty — dot field breathes)
+   and bottom (identity + meta). */
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding-inline: var(--gutter);
+    padding-block-end: clamp(2.5rem, 5vh, 4rem);
+    pointer-events: none;
+}
+
+/* Bottom cluster: name left, meta right */
+.hero__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    /* No border — the dot field flows uninterrupted to the edge */
+}
+
+/* Name: thin, tracked wide, set in mono — a signature not a shout.
+   Lightweight enough to feel part of the negative space. */
+.hero__name {
+    font-family: var(--font-body);
+    font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.5;
+}
+
+.hero__meta {
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5rem;
+}
+
+.hero__index {
+    font-family: var(--font-body);
+    font-size: 0.575rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.35;
+    text-align: right;
+    line-height: 2;
+}
+
+/* Available badge — barely there */
+.badge-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-body);
+    font-size: 0.575rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.8;
+}
+
+.badge-accent::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+   STICKY BLACK BAR
+   Sits immediately below the hero in the DOM.
+   position: sticky + top: 0 means it scrolls
+   up with the page until it hits the viewport
+   top — then locks. Pure CSS, zero JS.
+   Full black. Crisp. A hard rule between the
+   atmospheric hero and the content below.
+───────────────────────────────────────────── */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: var(--ink);
+    padding-block: 1.125rem;
+    padding-inline: var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-header__wordmark {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+.site-header__nav {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.site-header__nav a {
+    font-family: var(--font-body);
+    font-size: 0.575rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    transition: color 0.2s;
+}
+
+.site-header__nav a:hover {
+    color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION SHARED
+───────────────────────────────────────────── */
+.section {
+    padding-block: clamp(6rem, 14vh, 12rem);
+    padding-inline: var(--gutter);
+    border-top: 1px solid var(--rule);
+}
+
+/* First section after the header needs no extra top border —
+   the black bar is already a strong separator */
+.site-header + .section {
+    border-top: none;
+}
+
+.section__header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-block-end: clamp(4rem, 8vw, 7rem);
+}
+
+.section__number {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-block-end: 0.2rem;
+}
+
+.section__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   ABOUT SECTION
+───────────────────────────────────────────── */
+.about__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap);
+}
+
+@media (min-width: 768px) {
+    .about__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 1024px) {
+    .about__grid { grid-template-columns: 2fr 1fr 1fr; }
+}
+
+.about__bio {
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    line-height: 1.95;
+}
+
+.about__bio p + p {
+    margin-top: 1.4em;
+}
+
+.stat-block {
+    border-left: 1px solid var(--rule);
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.stat-item__value {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    line-height: 0.9;
+    margin-block-end: 0.4em;
+}
+
+.stat-item__label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* ─────────────────────────────────────────────
+   STACK SECTION
+───────────────────────────────────────────── */
+.stack__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(9rem, 16vw, 14rem), 1fr));
+    gap: 0;
+}
+
+.stack__item {
+    border: 1px solid var(--rule);
+    margin: 0 -1px -1px 0;
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.stack__item:hover {
+    background-color: var(--ink);
+    color: var(--paper);
+}
+
+.stack__item:hover .stack__category {
+    color: var(--accent);
+}
+
+.stack__name {
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.stack__category {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.15s;
+}
+
+/* ─────────────────────────────────────────────
+   CONTACT SECTION
+   Just the links. Nothing more.
+   The section number and title provide all the
+   framing needed. Below that: silence and email.
+───────────────────────────────────────────── */
+.contact__links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+}
+
+.contact__link-item a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    transition: color 0.2s;
+}
+
+.contact__link-item:first-child a {
+    border-top: 1px solid var(--rule);
+}
+
+.contact__link-item a:hover {
+    color: var(--ink);
+}
+
+.contact__link-item a::after {
+    content: "↗";
+    font-size: 0.65rem;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+
+.contact__link-item a:hover::after {
+    opacity: 0.7;
+}
+
+/* ─────────────────────────────────────────────
+   SITE FOOTER
+───────────────────────────────────────────── */
+.site-footer {
+    padding-block: 2.5rem;
+    padding-inline: var(--gutter);
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.site-footer__copy {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.site-footer__status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    flex-shrink: 0;
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+}
