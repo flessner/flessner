@@ -1,15 +1,34 @@
-# Rust
-/target/
-
-# Node
+# dependencies
 node_modules/
 
-# Environment
-.env
-.env.*
+# build artifacts
+build/
+dist/
+.cache/
+.react-router/
 
-# Editor
-.idea/
+# env
+.env
+.env.local
+.env.*.local
+
+# editor
 .vscode/
-*.swp
-*.swo
+.idea/
+target/
+flycheck_*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# brainstorm/agent state — never committed
+.superpowers/
+.claude/
+
+# local docs (design specs, plans) — kept local, not committed
+docs/
+
+# logs
+*.log
+npm-debug.log*
