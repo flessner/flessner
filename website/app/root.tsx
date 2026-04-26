@@ -13,14 +13,11 @@ import "./app.css";
 import { ThemeProvider, type ThemeChoice } from "./hooks/useTheme";
 import { readPreferencesFromCookie } from "./lib/preferences";
 
-// Vite's @vercel/* SDKs can't read process.env in the browser bundle, so the
-// obfuscated per-project script path isn't wired up — assets fall back to
-// /_vercel/* and adblockers nuke them. Vercel also exposes the same JSON via
-// VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG, which Vite inlines at build time;
-// pass it as configString to bypass the broken internal getter.
-const VERCEL_OBS_CONFIG = (
-  import.meta.env as { VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG?: string }
-).VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG;
+// Injected by vite.config.ts at build time from
+// `process.env.VERCEL_OBSERVABILITY_CLIENT_CONFIG`. Empty string locally.
+declare const __VERCEL_OBSERVABILITY_CLIENT_CONFIG__: string;
+const VERCEL_OBS_CONFIG: string | undefined =
+  __VERCEL_OBSERVABILITY_CLIENT_CONFIG__ || undefined;
 
 export function loader({ request }: LoaderFunctionArgs) {
   const prefs = readPreferencesFromCookie(request.headers.get("cookie"));
