@@ -1,5 +1,4 @@
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import {
   Links,
   Meta,
@@ -83,7 +82,6 @@ export default function App() {
         <Outlet />
       </ThemeProvider>
       <Analytics configString={VERCEL_OBS_CONFIG} />
-      <SpeedInsights configString={VERCEL_OBS_CONFIG} />
     </>
   );
 }
