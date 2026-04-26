@@ -30,7 +30,7 @@ export default function Home() {
       <Section title="meta">
         <div>
           <Link
-            href="https://uma.flessner.dev/share/JvjfsBaMwZy7A4ul"
+            href="https://u.flessner.dev/share/GN7d7Ph39xZJJKFc"
             external
           >
             analytics
