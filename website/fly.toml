@@ -1,0 +1,22 @@
+app = 'flessner-web'
+primary_region = 'ams'
+
+[build]
+
+[build.args]
+VITE_UMAMI_HOST = 'u.flessner.dev'
+VITE_UMAMI_WEBSITE_ID = '873b1957-e5f4-419e-837d-2a6eed26aa6b'
+
+[http_service]
+internal_port = 3000
+force_https = true
+auto_stop_machines = 'stop'
+auto_start_machines = false
+min_machines_running = 1
+processes = ['app']
+
+[[vm]]
+memory = '256mb'
+cpu_kind = 'shared'
+cpus = 1
+memory_mb = 256

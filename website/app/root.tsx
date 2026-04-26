@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/react";
 import {
   Links,
   Meta,
@@ -13,11 +12,13 @@ import "./app.css";
 import { ThemeProvider, type ThemeChoice } from "./hooks/useTheme";
 import { readPreferencesFromCookie } from "./lib/preferences";
 
-// Injected by vite.config.ts at build time from
-// `process.env.VERCEL_OBSERVABILITY_CLIENT_CONFIG`. Empty string locally.
-declare const __VERCEL_OBSERVABILITY_CLIENT_CONFIG__: string;
-const VERCEL_OBS_CONFIG: string | undefined =
-  __VERCEL_OBSERVABILITY_CLIENT_CONFIG__ || undefined;
+// Vite replaces `import.meta.env.VITE_*` with literal strings at build time
+// in both server and client bundles (sourced from `[build.args]` in fly.toml
+// → Dockerfile ARG → ENV → Vite).
+const UMAMI_HOST = import.meta.env.VITE_UMAMI_HOST as string | undefined;
+const UMAMI_WEBSITE_ID = import.meta.env.VITE_UMAMI_WEBSITE_ID as
+  | string
+  | undefined;
 
 export function loader({ request }: LoaderFunctionArgs) {
   const prefs = readPreferencesFromCookie(request.headers.get("cookie"));
@@ -61,6 +62,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
+        {UMAMI_HOST && UMAMI_WEBSITE_ID && (
+          <script
+            defer
+            src={`https://${UMAMI_HOST}/script.js`}
+            data-website-id={UMAMI_WEBSITE_ID}
+          />
+        )}
       </head>
       <body>
         {children}
@@ -74,11 +82,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const { themeChoice } = useLoaderData<typeof loader>();
   return (
-    <>
-      <ThemeProvider initialChoice={themeChoice}>
-        <Outlet />
-      </ThemeProvider>
-      <Analytics configString={VERCEL_OBS_CONFIG} />
-    </>
+    <ThemeProvider initialChoice={themeChoice}>
+      <Outlet />
+    </ThemeProvider>
   );
 }
