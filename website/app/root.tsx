@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import {
   Links,
   Meta,
@@ -6,28 +8,25 @@ import {
   ScrollRestoration,
   type LoaderFunctionArgs,
   useLoaderData,
-  useRouteLoaderData,
 } from "react-router";
 
 import "./app.css";
 import { ThemeProvider, type ThemeChoice } from "./hooks/useTheme";
 import { readPreferencesFromCookie } from "./lib/preferences";
 
-interface UmamiConfig {
-  host: string;
-  websiteId: string;
-}
+// Vite's @vercel/* SDKs can't read process.env in the browser bundle, so the
+// obfuscated per-project script path isn't wired up — assets fall back to
+// /_vercel/* and adblockers nuke them. Vercel also exposes the same JSON via
+// VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG, which Vite inlines at build time;
+// pass it as configString to bypass the broken internal getter.
+const VERCEL_OBS_CONFIG = (
+  import.meta.env as { VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG?: string }
+).VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG;
 
 export function loader({ request }: LoaderFunctionArgs) {
   const prefs = readPreferencesFromCookie(request.headers.get("cookie"));
   const themeChoice: ThemeChoice = prefs.theme ?? "system";
-  const umamiHost = process.env.UMAMI_HOST;
-  const umamiWebsiteId = process.env.UMAMI_WEBSITE_ID;
-  const umami: UmamiConfig | null =
-    umamiHost && umamiWebsiteId
-      ? { host: umamiHost, websiteId: umamiWebsiteId }
-      : null;
-  return { themeChoice, umami };
+  return { themeChoice };
 }
 
 export function meta() {
@@ -57,10 +56,6 @@ const THEME_BOOT = `
 `;
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const data = useRouteLoaderData("root") as
-    | { umami?: UmamiConfig | null }
-    | undefined;
-  const umami = data?.umami;
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -70,13 +65,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
-        {umami && (
-          <script
-            defer
-            src={`https://${umami.host}/script.js`}
-            data-website-id={umami.websiteId}
-          />
-        )}
       </head>
       <body>
         {children}
@@ -90,8 +78,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const { themeChoice } = useLoaderData<typeof loader>();
   return (
-    <ThemeProvider initialChoice={themeChoice}>
-      <Outlet />
-    </ThemeProvider>
+    <>
+      <ThemeProvider initialChoice={themeChoice}>
+        <Outlet />
+      </ThemeProvider>
+      <Analytics configString={VERCEL_OBS_CONFIG} />
+      <SpeedInsights configString={VERCEL_OBS_CONFIG} />
+    </>
   );
 }
