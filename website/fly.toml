@@ -5,7 +5,7 @@ primary_region = 'ams'
 
 [build.args]
 VITE_UMAMI_HOST = 'u.flessner.dev'
-VITE_UMAMI_WEBSITE_ID = '873b1957-e5f4-419e-837d-2a6eed26aa6b'
+VITE_UMAMI_WEBSITE_ID = '31518d5d-bd8e-411a-a55c-0490de6b0faa'
 
 [http_service]
 internal_port = 3000

@@ -2,7 +2,7 @@ app = 'flessner-umami'
 primary_region = 'ams'
 
 [build]
-image = 'ghcr.io/umami-software/umami:postgresql-latest'
+image = 'ghcr.io/umami-software/umami:3.1'
 
 [env]
 DISABLE_TELEMETRY = '1'
