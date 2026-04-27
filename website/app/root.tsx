@@ -67,6 +67,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             defer
             src={`https://${UMAMI_HOST}/script.js`}
             data-website-id={UMAMI_WEBSITE_ID}
+            data-performance="true"
           />
         )}
       </head>

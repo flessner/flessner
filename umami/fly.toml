@@ -25,6 +25,6 @@ path = '/api/heartbeat'
 
 [[vm]]
 size = 'shared-cpu-1x'
-memory = '512mb'
+memory = '768mb'
 cpus = 1
-memory_mb = 512
+memory_mb = 768
